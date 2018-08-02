@@ -22,10 +22,6 @@ public class MainActivity extends AppCompatActivity implements LiveStateChangeLi
     static final String URL = "rtmp://119.131.176.169/live/test2";
 
     static final String PULL = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
-    //static final String URL = "rtmp://192.168.0.122/live/jason";
-    //static final String URL = "rtmp://112.74.96.116/live/jason";
-    //jason老师的 对应  http://dongnaoedu.com:9080
-    //static final String URL = "rtmp://139.196.34.133/live/jason";
     private LivePusher live;
 
 
@@ -50,7 +46,9 @@ public class MainActivity extends AppCompatActivity implements LiveStateChangeLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surface);
+        //SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surface);
+        DragSurfaceView surfaceView = (DragSurfaceView) findViewById(R.id.surface);
+
         ijkplayer = (IjkVideoView) findViewById(R.id.ijkplayer);
         //System.out.println("isInMainThread()=" + ThreadUtils.isInMainThread());//在这里调用一下方法
 

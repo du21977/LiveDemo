@@ -14,12 +14,21 @@
     </com.yinglian.baselibrary.ijkplayer.widget.IjkVideoView>
 
 
-    <android.view.SurfaceView
+    <!--<android.view.SurfaceView-->
+        <!--android:id="@+id/surface"-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="200dp"-->
+
+       <!--android:layout_above="@+id/adcontainer"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--/>-->
+
+    <com.dobi.live.DragSurfaceView
         android:id="@+id/surface"
         android:layout_width="200dp"
         android:layout_height="200dp"
 
-       android:layout_above="@+id/adcontainer"
+        android:layout_above="@+id/adcontainer"
         android:layout_alignParentRight="true"
         />
 
