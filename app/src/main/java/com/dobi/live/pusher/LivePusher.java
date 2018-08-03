@@ -94,7 +94,7 @@ public class LivePusher implements Callback {
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		stopPush();
-		release();
+	//	release();
 	}
 	
 }

@@ -19,9 +19,9 @@ import com.yinglian.baselibrary.ijkplayer.widget.IjkVideoView;
  */
 public class MainActivity extends AppCompatActivity implements LiveStateChangeListener {
 
-    static final String URL = "rtmp://119.131.176.169/live/test2";
+    static  String PUSH = "rtmp://119.131.176.169/live/test2";
 
-    static final String PULL = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
+    static  String PULL = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
     private LivePusher live;
 
 
@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity implements LiveStateChangeLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surface);
-        DragSurfaceView surfaceView = (DragSurfaceView) findViewById(R.id.surface);
+        SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surface);
+        //DragSurfaceView surfaceView = (DragSurfaceView) findViewById(R.id.surface);
 
         ijkplayer = (IjkVideoView) findViewById(R.id.ijkplayer);
         //System.out.println("isInMainThread()=" + ThreadUtils.isInMainThread());//在这里调用一下方法
@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements LiveStateChangeLi
         //相机图像的预览
         live = new LivePusher(surfaceView.getHolder());
 
+        PULL = SetupActivity.pull__;
+        PUSH = SetupActivity.push__;
         ijkplayer.setVideoPath(PULL);
         ijkplayer.start();
     }
@@ -65,12 +67,12 @@ public class MainActivity extends AppCompatActivity implements LiveStateChangeLi
      */
     public void mStartLive(View view) {
         Button btn = (Button)view;
-        if(btn.getText().equals("开始直播")){
-            live.startPush(URL,this);
-            btn.setText("停止直播");
+        if(btn.getText().equals("开始推流")){
+            live.startPush(PUSH,this);
+            btn.setText("停止推流");
         }else{
             live.stopPush();
-            btn.setText("开始直播");
+            btn.setText("开始推流");
         }
     }
 
@@ -86,5 +88,12 @@ public class MainActivity extends AppCompatActivity implements LiveStateChangeLi
     @Override
     public void onError(int code) {
         handler.sendEmptyMessage(code);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ijkplayer.stopPlayback();
     }
 }
