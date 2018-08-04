@@ -1,78 +1,74 @@
 package com.dobi.live;
 
 import android.graphics.Color;
-import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
-import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.blueberry.media.Config;
-import com.blueberry.media.MediaPublisher;
+import com.dobi.live.jni.PushNative;
+import com.dobi.live.listener.LiveStateChangeListener;
+import com.dobi.live.pusher.LivePusher;
 import com.yinglian.baselibrary.ijkplayer.widget.IjkVideoView;
 
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
-
-public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback2 {
-
+/**
+ * 在jason基础上自己修改
+ */
+public class Main1Activity extends AppCompatActivity implements LiveStateChangeListener {
+    private static final String TAG = "Main1Activity-Video";
     static  String PUSH = "rtmp://119.131.176.169/live/test2";
+
     static  String PULL = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
+    private LivePusher live;
 
-    private static final String TAG = "MainActivity";
-
-    //开始推送按钮
-    private Button btnToggle;
-    //显示视频
-    private SurfaceView mSurfaceView;
-
-    private SurfaceHolder mSurfaceHolder;
-
-    private boolean isPublished;
-
-    //音视频推送类
-    private MediaPublisher mMediaPublisher;
 
     IjkVideoView ijkplayer;
     ProgressBar progressbar;
-
+    private Handler handler = new Handler(){
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case PushNative.CONNECT_FAILED:
+                    Toast.makeText(Main1Activity.this, "连接失败", Toast.LENGTH_SHORT).show();
+                    //Log.d("jason", "连接失败..");
+                    break;
+                case PushNative.INIT_FAILED:
+                    Toast.makeText(Main1Activity.this, "初始化失败", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_2);
-        Log.i(TAG, "onCreate: ");
-        initView();
-        //音视频参数初始化参数
-        mMediaPublisher = MediaPublisher
-                .newInstance(new Config.Builder()
-                        .setFps(25) // fps
-                        .setMaxWidth(320) //视频的最大宽度
-                        .setMinWidth(240) //视频的最小宽度
-                        .setUrl(PUSH)//推送的url
-                        .build());
-        //初始化视频采集器，音频采集器，视频编码器，音频编码器
-        mMediaPublisher.init();
+        setContentView(R.layout.activity_main);
+        SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surface);
+        //DragSurfaceView surfaceView = (DragSurfaceView) findViewById(R.id.surface);
+        progressbar = (ProgressBar) findViewById(R.id.progressbar);
+        ijkplayer = (IjkVideoView) findViewById(R.id.ijkplayer);
+        //System.out.println("isInMainThread()=" + ThreadUtils.isInMainThread());//在这里调用一下方法
 
-        initData();
-    }
+        //相机图像的预览
+        live = new LivePusher(surfaceView.getHolder());
 
-    /**
-     * 播放拉流地址
-     */
-    private void initData() {
         PULL = SetupActivity.pull__;
         PUSH = SetupActivity.push__;
         ijkplayer.setVideoPath(PULL);
         ijkplayer.start();
+
         ijkplayer.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(IMediaPlayer iMediaPlayer, int i, int i1) {
-                Toast.makeText(MainActivity.this,"播放出错啦",Toast.LENGTH_LONG).show();
+                Toast.makeText(Main1Activity.this,"播放出错啦",Toast.LENGTH_LONG).show();
                 return true;
             }
         });
@@ -130,92 +126,39 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         });
     }
 
-    private void initView() {
-        progressbar = (ProgressBar) findViewById(R.id.progressbar);
-        ijkplayer = (IjkVideoView) findViewById(R.id.ijkplayer);
-        btnToggle = (Button) findViewById(R.id.btn_push);
-        mSurfaceView = (SurfaceView) findViewById(R.id.surface_view);
-        mSurfaceView.setKeepScreenOn(true);
-        mSurfaceHolder = mSurfaceView.getHolder();
-        mSurfaceHolder.addCallback(this);
-        btnToggle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchPublish();
-            }
-        });
-    }
-
-    private void switchPublish() {
-        if (isPublished) {
-            stop();
-        } else {
-            start();
+    /**
+     * 开始直播
+     * @param
+     */
+    public void mStartLive(View view) {
+        Button btn = (Button)view;
+        if(btn.getText().equals("开始推流")){
+            live.startPush(PUSH,this);
+            btn.setText("停止推流");
+        }else{
+            live.stopPush();
+            btn.setText("开始推流");
         }
-        btnToggle.setText(isPublished ? "停止推流" : "开始推流");
     }
 
-    private void start() {
-        //初始化声音采集
-        mMediaPublisher.initAudioGatherer();
-        //初始化编码器
-        mMediaPublisher.initEncoders();
-        //开始采集
-        mMediaPublisher.startGather();
-        //开始编码
-        mMediaPublisher.startEncoder();
-        //开始推送
-        mMediaPublisher.starPublish();
-        isPublished = true;
+    /**
+     * 切换摄像头
+     * @param btn
+     */
+    public void mSwitchCamera(View btn) {
+        live.switchCamera();
     }
 
+    //改方法执行仍然在子线程中，发送消息到UI主线程
     @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i(TAG, "onResume: ");
-        mMediaPublisher.initVideoGatherer(this, mSurfaceHolder);
-
+    public void onError(int code) {
+        handler.sendEmptyMessage(code);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i(TAG, "onPause: ");
-        stop();
-    }
-
-    private void stop() {
-        mMediaPublisher.stopPublish();
-        mMediaPublisher.stopGather();
-        mMediaPublisher.stopEncoder();
-        isPublished = false;
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mMediaPublisher.release();
+        ijkplayer.stopPlayback();
     }
-
-    @Override
-    public void surfaceRedrawNeeded(SurfaceHolder holder) {
-
-    }
-
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        Log.i(TAG, "surfaceChanged: ");
-        mMediaPublisher.initVideoGatherer(MainActivity.this, holder);
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-
-    }
-
 }
