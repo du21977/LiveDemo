@@ -1,11 +1,14 @@
 package com.dobi.live;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,11 +17,13 @@ import com.dobi.live.listener.LiveStateChangeListener;
 import com.dobi.live.pusher.LivePusher;
 import com.yinglian.baselibrary.ijkplayer.widget.IjkVideoView;
 
+import tv.danmaku.ijk.media.player.IMediaPlayer;
+
 /**
  * 在jason基础上自己修改
  */
 public class MainActivity extends AppCompatActivity implements LiveStateChangeListener {
-
+    private static final String TAG = "MainActivity-Video";
     static  String PUSH = "rtmp://119.131.176.169/live/test2";
 
     static  String PULL = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
@@ -26,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements LiveStateChangeLi
 
 
     IjkVideoView ijkplayer;
+    ProgressBar progressbar;
     private Handler handler = new Handler(){
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
@@ -48,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements LiveStateChangeLi
         setContentView(R.layout.activity_main);
         SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surface);
         //DragSurfaceView surfaceView = (DragSurfaceView) findViewById(R.id.surface);
-
+        progressbar = (ProgressBar) findViewById(R.id.progressbar);
         ijkplayer = (IjkVideoView) findViewById(R.id.ijkplayer);
         //System.out.println("isInMainThread()=" + ThreadUtils.isInMainThread());//在这里调用一下方法
 
@@ -59,6 +65,66 @@ public class MainActivity extends AppCompatActivity implements LiveStateChangeLi
         PUSH = SetupActivity.push__;
         ijkplayer.setVideoPath(PULL);
         ijkplayer.start();
+
+        ijkplayer.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(IMediaPlayer iMediaPlayer, int i, int i1) {
+                Toast.makeText(MainActivity.this,"播放出错啦",Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
+
+        ijkplayer.setOnInfoListener(new IMediaPlayer.OnInfoListener() {
+            @Override
+            public boolean onInfo(IMediaPlayer iMediaPlayer, int arg1, int arg2) {
+                Log.e("haha--onInfo", arg1 + "");
+                switch (arg1) {
+                    case IMediaPlayer.MEDIA_INFO_VIDEO_TRACK_LAGGING:
+                        Log.e(TAG, "MEDIA_INFO_VIDEO_TRACK_LAGGING:");
+                        break;
+                    case IMediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START:
+                        Log.e(TAG, "MEDIA_INFO_VIDEO_RENDERING_START:");
+                        progressbar.setVisibility(View.GONE);
+                        ijkplayer.setBackgroundColor(Color.TRANSPARENT);
+                        break;
+                    case IMediaPlayer.MEDIA_INFO_BUFFERING_START:    //开始了缓冲，卡了
+                        Log.e(TAG, "MEDIA_INFO_BUFFERING_START:");
+                        progressbar.setVisibility(View.VISIBLE);
+                        break;
+                    case IMediaPlayer.MEDIA_INFO_BUFFERING_END:     //缓冲结束，卡结束
+                        Log.e(TAG, "MEDIA_INFO_BUFFERING_END:");
+                        progressbar.setVisibility(View.GONE);
+                        break;
+                    case IMediaPlayer.MEDIA_INFO_NETWORK_BANDWIDTH:
+                        Log.e(TAG, "MEDIA_INFO_NETWORK_BANDWIDTH: " + arg2);
+                        break;
+                    case IMediaPlayer.MEDIA_INFO_BAD_INTERLEAVING:
+                        Log.e(TAG, "MEDIA_INFO_BAD_INTERLEAVING:");
+                        break;
+                    case IMediaPlayer.MEDIA_INFO_NOT_SEEKABLE:
+                        Log.e(TAG, "MEDIA_INFO_NOT_SEEKABLE:");
+                        break;
+                    case IMediaPlayer.MEDIA_INFO_METADATA_UPDATE:
+                        Log.e(TAG, "MEDIA_INFO_METADATA_UPDATE:");
+                        break;
+                    case IMediaPlayer.MEDIA_INFO_UNSUPPORTED_SUBTITLE:
+                        Log.e(TAG, "MEDIA_INFO_UNSUPPORTED_SUBTITLE:");
+                        break;
+                    case IMediaPlayer.MEDIA_INFO_SUBTITLE_TIMED_OUT:
+                        Log.e(TAG, "MEDIA_INFO_SUBTITLE_TIMED_OUT:");
+                        break;
+                    case IMediaPlayer.MEDIA_INFO_VIDEO_ROTATION_CHANGED:
+
+                        Log.e(TAG, "MEDIA_INFO_VIDEO_ROTATION_CHANGED: " + arg2);
+
+                        break;
+                    case IMediaPlayer.MEDIA_INFO_AUDIO_RENDERING_START:
+                        Log.e(TAG, "MEDIA_INFO_AUDIO_RENDERING_START:");
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     /**

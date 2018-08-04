@@ -5,6 +5,7 @@ import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.PreviewCallback;
 import android.os.Environment;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 
@@ -14,6 +15,8 @@ import com.dobi.live.params.VideoParam;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 public class VideoPusher extends Pusher implements Callback, PreviewCallback{
 
@@ -101,7 +104,7 @@ public class VideoPusher extends Pusher implements Callback, PreviewCallback{
 			parameters.setPreviewSize(videoParams.getWidth(), videoParams.getHeight()); //预览画面宽高、
 
 			/////////////////////////////////////////下面//////addby du 2017-11-20/////////////////////
-			/*
+
 			//获取摄像头支持的数据格式
 			List<Integer> list = parameters.getSupportedPreviewFormats();
 			for(Integer val : list){
@@ -116,7 +119,7 @@ public class VideoPusher extends Pusher implements Callback, PreviewCallback{
 					Log.e("jw","size=="+cur.width +"  "+cur.height);
 				}
 			}
-			*/
+
 			//////////////////////////////////////////上面/////addby du 2017-11-20/////////////////////
 
 			mCamera.setParameters(parameters);//参数真正设置上去了

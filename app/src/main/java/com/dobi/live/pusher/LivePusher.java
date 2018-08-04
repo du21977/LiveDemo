@@ -32,7 +32,7 @@ public class LivePusher implements Callback {
 		
 		//实例化视频推流器
 		//VideoParam videoParam = new VideoParam(1280, 720, CameraInfo.CAMERA_FACING_BACK);
-		VideoParam videoParam = new VideoParam(480, 320, CameraInfo.CAMERA_FACING_BACK);
+		VideoParam videoParam = new VideoParam(320, 240, CameraInfo.CAMERA_FACING_BACK);
 		videoPusher = new VideoPusher(surfaceHolder,videoParam,pushNative);
 		
 		//实例化音频推流器
