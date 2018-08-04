@@ -54,7 +54,7 @@ dependencies {
     compile project(':baselibrary')
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'tv.danmaku.ijk.media:ijkplayer-exo:0.6.1'
+    //compile 'tv.danmaku.ijk.media:ijkplayer-exo:0.6.1'
     testCompile 'junit:junit:4.12'
     compile project(':rtmplive')
 }

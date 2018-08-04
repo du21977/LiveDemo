@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+
+    <!--<com.yinglian.baselibrary.ijkplayer.widget.IjkVideoView-->
+        <!--android:id="@+id/ijkplayer"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--&gt;-->
+    <!--</com.yinglian.baselibrary.ijkplayer.widget.IjkVideoView>-->
+    <com.dobi.live.video.EmptyControlVideo
+        android:id="@+id/gsyplayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true" />
+
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+
+    <android.view.SurfaceView
+        android:id="@+id/surface"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+       android:layout_above="@+id/adcontainer"
+        android:layout_alignParentRight="true"
+
+        />
+
+    <!--<com.dobi.live.DragSurfaceView-->
+        <!--android:id="@+id/surface"-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="200dp"-->
+
+        <!--android:layout_above="@+id/adcontainer"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--/>-->
+
+    <LinearLayout
+        android:id="@+id/adcontainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        >
+
+        <Button
+            android:id="@+id/btn_push"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:onClick="mStartLive"
+            android:text="开始推流"/>
+
+        <Button
+            android:id="@+id/btn_camera_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="切换摄像头"
+            android:onClick="mSwitchCamera"/>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

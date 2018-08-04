@@ -29,6 +29,16 @@
             android:screenOrientation="landscape"
             ></activity>
 
+        <activity android:name=".Main1Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
+            ></activity>
+
+        <activity android:name=".Main22Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
+            ></activity>
+
         <!--<provider-->
             <!--android:authorities="com.bh.yy.fileprovider"-->
             <!--android:name="android.support.v4.content.FileProvider"-->

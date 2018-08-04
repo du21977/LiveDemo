@@ -29,8 +29,17 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     testCompile 'junit:junit:4.12'
 
-    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.6.1'
-//    compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.1'
-//
-    compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.6.1'
+//    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.6.1'
+//    compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.6.1'
+
+
+    //这个已经包含了ijkplayer-java:0.6.1'
+    compile 'com.shuyu:gsyVideoPlayer-java:2.1.0'
+    compile 'com.shuyu:gsyVideoPlayer-armv5:2.1.0'
+
+    //播放器-------这里面有ijkplayer需要的库
+    //compile 'com.shuyu:GSYVideoPlayer:2.1.0'
+
+
+
 }

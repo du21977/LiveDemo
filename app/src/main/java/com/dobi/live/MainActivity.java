@@ -17,7 +17,9 @@ import com.yinglian.baselibrary.ijkplayer.widget.IjkVideoView;
 
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
-
+/**
+ * 用的那个没延时的
+ */
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback2 {
 
     static  String PUSH = "rtmp://119.131.176.169/live/test2";
@@ -67,8 +69,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     private void initData() {
         PULL = SetupActivity.pull__;
         PUSH = SetupActivity.push__;
-        ijkplayer.setVideoPath(PULL);
-        ijkplayer.start();
+//        ijkplayer.setVideoPath(PULL);
+//        ijkplayer.start();
         ijkplayer.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(IMediaPlayer iMediaPlayer, int i, int i1) {
@@ -149,8 +151,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     private void switchPublish() {
         if (isPublished) {
             stop();
+            ijkplayer.stopPlayback();
         } else {
             start();
+            ijkplayer.setVideoPath(PULL);
+            ijkplayer.start();
         }
         btnToggle.setText(isPublished ? "停止推流" : "开始推流");
     }
@@ -189,6 +194,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         mMediaPublisher.stopGather();
         mMediaPublisher.stopEncoder();
         isPublished = false;
+        ijkplayer.stopPlayback();
     }
 
     @Override

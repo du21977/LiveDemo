@@ -26,7 +26,7 @@ public class SetupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 push__ = et_push.getText().toString().trim();
                 pull__ = et_pull.getText().toString().trim();
-                startActivity(new Intent(SetupActivity.this,MainActivity.class));
+                startActivity(new Intent(SetupActivity.this,Main1Activity.class));
             }
         });
     }
