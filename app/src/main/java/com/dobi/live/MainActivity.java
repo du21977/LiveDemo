@@ -18,7 +18,7 @@ import com.yinglian.baselibrary.ijkplayer.widget.IjkVideoView;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 /**
- * 用的那个没延时的
+ * 用的那个没延时的--
  */
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback2 {
 

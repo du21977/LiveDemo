@@ -62,7 +62,7 @@ public class Main1Activity extends AppCompatActivity implements LiveStateChangeL
 
         PULL = SetupActivity.pull__;
         PUSH = SetupActivity.push__;
-//        ijkplayer.setVideoPath(PULL);
+        ijkplayer.setVideoPath(PULL);
 //        ijkplayer.start();
 
         ijkplayer.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
@@ -136,12 +136,19 @@ public class Main1Activity extends AppCompatActivity implements LiveStateChangeL
             live.startPush(PUSH,this);
             btn.setText("停止推流");
 
-            ijkplayer.setVideoPath(PULL);
-            ijkplayer.start();
+            progressbar.setVisibility(View.VISIBLE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    ijkplayer.start();
+                }
+            },3000);
+
         }else{
             live.stopPush();
             btn.setText("开始推流");
-            ijkplayer.stopPlayback();
+            //ijkplayer.stopPlayback();
+            ijkplayer.pause();
         }
     }
 

@@ -21,7 +21,7 @@ import com.yinglian.baselibrary.ijkplayer.widget.IjkVideoView;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 /**
- * 在jason基础上自己修改
+ * 在jason基础上自己修改 GSY播放器
  */
 public class Main22Activity extends AppCompatActivity implements LiveStateChangeListener {
     private static final String TAG = "Main1Activity-Video";

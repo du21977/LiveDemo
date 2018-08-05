@@ -34,6 +34,7 @@ public class VideoGatherer {
     private Thread workThread;
     private boolean loop;
     private Callback mCallback;
+    private static Camera.CameraInfo cameraInfo;
 
     //初始化视频参数
     public static VideoGatherer newInstance(Config config) {
@@ -250,9 +251,8 @@ public class VideoGatherer {
 
     public static void setCameraDisplayOrientation(Activity activity,
                                                    int cameraId, android.hardware.Camera camera) {
-        android.hardware.Camera.CameraInfo info =
-                new android.hardware.Camera.CameraInfo();
-        android.hardware.Camera.getCameraInfo(cameraId, info);
+        cameraInfo = new Camera.CameraInfo();
+        android.hardware.Camera.getCameraInfo(cameraId, cameraInfo);
         int rotation = activity.getWindowManager().getDefaultDisplay()
                 .getRotation();
         int degrees = 0;
@@ -272,11 +272,11 @@ public class VideoGatherer {
         }
 
         int result;
-        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-            result = (info.orientation + degrees) % 360;
+        if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            result = (cameraInfo.orientation + degrees) % 360;
             result = (360 - result) % 360;  // compensate the mirror
         } else {  // back-facing
-            result = (info.orientation - degrees + 360) % 360;
+            result = (cameraInfo.orientation - degrees + 360) % 360;
         }
         camera.setDisplayOrientation(result);
     }
@@ -289,6 +289,14 @@ public class VideoGatherer {
                 e.printStackTrace();
                 throw new RuntimeException("打开摄像头失败", e);
             }
+        }
+    }
+
+    public static void switchCamara(){
+        if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            cameraInfo.facing = Camera.CameraInfo.CAMERA_FACING_BACK;
+        }else {
+            cameraInfo.facing = Camera.CameraInfo.CAMERA_FACING_FRONT;
         }
     }
 }
