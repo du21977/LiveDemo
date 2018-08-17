@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ThreePullActivity"
+            android:name=".ThreePull2Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -47,9 +47,12 @@
         <!-- android:resource="@xml/filepaths"/> -->
         <!-- </provider> -->
 
-        <activity android:name=".SetupActivity"
-
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".SetupActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ThreePullActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
             ></activity>
     </application>
 
