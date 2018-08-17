@@ -28,7 +28,6 @@
         android:layout_height="200dp"
        android:layout_above="@+id/adcontainer"
         android:layout_alignParentRight="true"
-
         />
 
     <!--<com.dobi.live.DragSurfaceView-->

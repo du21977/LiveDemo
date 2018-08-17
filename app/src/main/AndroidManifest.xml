@@ -15,40 +15,42 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SetupActivity"
-            android:screenOrientation="portrait"
-            >
+            android:name=".ThreePullActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
-            ></activity>
-
-        <activity android:name=".Main1Activity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Main1Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
-            ></activity>
-
-        <activity android:name=".Main22Activity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Main22Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
+            android:screenOrientation="landscape" />
+
+        <!-- <provider -->
+        <!-- android:authorities="com.bh.yy.fileprovider" -->
+        <!-- android:name="android.support.v4.content.FileProvider" -->
+        <!-- android:grantUriPermissions="true" -->
+        <!-- android:exported="false"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.FILE_PROVIDER_PATHS" -->
+        <!-- android:resource="@xml/filepaths"/> -->
+        <!-- </provider> -->
+
+        <activity android:name=".SetupActivity"
+
+            android:screenOrientation="portrait"
             ></activity>
-
-        <!--<provider-->
-            <!--android:authorities="com.bh.yy.fileprovider"-->
-            <!--android:name="android.support.v4.content.FileProvider"-->
-            <!--android:grantUriPermissions="true"-->
-            <!--android:exported="false">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
-                <!--android:resource="@xml/filepaths"/>-->
-        <!--</provider>-->
-
     </application>
 
 </manifest>

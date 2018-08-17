@@ -7,6 +7,7 @@
 #define LOGE(FORMAT,...) __android_log_print(ANDROID_LOG_ERROR,"jason",FORMAT,##__VA_ARGS__)
 
 #include <pthread.h>
+#include <string.h>
 #include "queue.h"
 #include "x264.h"
 #include "rtmp.h"
