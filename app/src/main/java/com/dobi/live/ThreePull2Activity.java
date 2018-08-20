@@ -27,6 +27,12 @@ public class ThreePull2Activity extends AppCompatActivity {
     private RelativeLayout.LayoutParams layoutParams_right_bottom;
 
     List<MyIjkVideoView[]> list = new ArrayList<MyIjkVideoView[]>() ;
+    private String PULL_0;
+    private String PULL_1;
+    private String PULL_2;
+    private MyIjkVideoView[] myIjkVideoView_1;
+    private MyIjkVideoView[] myIjkVideoView_2;
+    private MyIjkVideoView[] myIjkVideoView_3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +50,7 @@ public class ThreePull2Activity extends AppCompatActivity {
 
        // 1.添加左边的播放器
         layoutParams_left = new RelativeLayout.LayoutParams(dp2px(400), RelativeLayout.LayoutParams.MATCH_PARENT);
-        final MyIjkVideoView[] myIjkVideoView_1 = {new MyIjkVideoView(this)};
+        myIjkVideoView_1 = new MyIjkVideoView[]{new MyIjkVideoView(this)};
         myIjkVideoView_1[0].setBackgroundColor(Color.BLUE);
         myIjkVideoView_1[0].setLayoutParams(layoutParams_left);
 
@@ -53,7 +59,7 @@ public class ThreePull2Activity extends AppCompatActivity {
         layoutParams_right_top = new RelativeLayout.LayoutParams(dp2px(200), dp2px(200));
         layoutParams_right_top.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         layoutParams_right_top.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        final MyIjkVideoView[] myIjkVideoView_2 = {new MyIjkVideoView(this)};
+        myIjkVideoView_2 = new MyIjkVideoView[]{new MyIjkVideoView(this)};
         myIjkVideoView_2[0].setBackgroundColor(Color.WHITE);
         myIjkVideoView_2[0].setLayoutParams(layoutParams_right_top);
 
@@ -61,7 +67,7 @@ public class ThreePull2Activity extends AppCompatActivity {
         layoutParams_right_bottom = new RelativeLayout.LayoutParams(dp2px(200), dp2px(200));
         layoutParams_right_bottom.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         layoutParams_right_bottom.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        final MyIjkVideoView[] myIjkVideoView_3 = {new MyIjkVideoView(this)};
+        myIjkVideoView_3 = new MyIjkVideoView[]{new MyIjkVideoView(this)};
         myIjkVideoView_3[0].setBackgroundColor(Color.BLACK);
         myIjkVideoView_3[0].setLayoutParams(layoutParams_right_bottom);
 
@@ -90,10 +96,17 @@ public class ThreePull2Activity extends AppCompatActivity {
 //        setContentView(R.layout.activity_three_pull2);
 
 
+        PULL_0 = Setup1Activity.pull__0;
+        PULL_1 = Setup1Activity.pull__1;
+        PULL_2 = Setup1Activity.pull__2;
 
-        myIjkVideoView_1[0].setVideoPath("rtmp://live.hkstv.hk.lxdns.com/live/hks");
-        myIjkVideoView_2[0].setVideoPath("rtmp://202.69.69.180:443/webcast/bshdlive-pc");
-        myIjkVideoView_3[0].setVideoPath("rtmp://mobliestream.c3tv.com:554/live/goodtv.sdp");
+//        myIjkVideoView_1[0].setVideoPath("rtmp://live.hkstv.hk.lxdns.com/live/hks");
+//        myIjkVideoView_2[0].setVideoPath("rtmp://202.69.69.180:443/webcast/bshdlive-pc");
+//        myIjkVideoView_3[0].setVideoPath("rtmp://mobliestream.c3tv.com:554/live/goodtv.sdp");
+
+        myIjkVideoView_1[0].setVideoPath(PULL_0);
+        myIjkVideoView_2[0].setVideoPath(PULL_1);
+        myIjkVideoView_3[0].setVideoPath(PULL_2);
 
         myIjkVideoView_1[0].start();
         myIjkVideoView_2[0].start();
@@ -102,7 +115,7 @@ public class ThreePull2Activity extends AppCompatActivity {
         textView1.setOnTouchListener(new OnDoubleClickListener(new OnDoubleClickListener.DoubleClickCallback() {
             @Override
             public void onDoubleClick() {
-                Toast.makeText(ThreePull2Activity.this,"双击11",Toast.LENGTH_LONG).show();
+              //  Toast.makeText(ThreePull2Activity.this,"双击11",Toast.LENGTH_LONG).show();
 
                 MyIjkVideoView myIjkVideoView = new MyIjkVideoView(ThreePull2Activity.this);
                 myIjkVideoView = list.get(0)[0];
@@ -121,7 +134,7 @@ public class ThreePull2Activity extends AppCompatActivity {
 //                myIjkVideoView_1[0].setLayoutParams(layoutParams_left);
 //                myIjkVideoView_2[0].setLayoutParams(layoutParams_right_top);
 
-
+                //list.get(1)[0].set
 
 
             }
@@ -130,7 +143,7 @@ public class ThreePull2Activity extends AppCompatActivity {
         textView2.setOnTouchListener(new OnDoubleClickListener(new OnDoubleClickListener.DoubleClickCallback() {
             @Override
             public void onDoubleClick() {
-                Toast.makeText(ThreePull2Activity.this,"双击22",Toast.LENGTH_LONG).show();
+              //  Toast.makeText(ThreePull2Activity.this,"双击22",Toast.LENGTH_LONG).show();
                 MyIjkVideoView myIjkVideoView = new MyIjkVideoView(ThreePull2Activity.this);
                 myIjkVideoView = list.get(0)[0];
                 list.get(0)[0] =list.get(2)[0];
@@ -221,5 +234,25 @@ public class ThreePull2Activity extends AppCompatActivity {
     public  int dp2px( float dpVal) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 dpVal, getResources().getDisplayMetrics());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+
+//        list.get(0)[0].stopPlayback();
+//        list.get(1)[0].stopPlayback();
+//        list.get(2)[0].stopPlayback();
+        myIjkVideoView_1[0].stopPlayback();
+        myIjkVideoView_2[0].stopPlayback();
+        myIjkVideoView_3[0].stopPlayback();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+
     }
 }

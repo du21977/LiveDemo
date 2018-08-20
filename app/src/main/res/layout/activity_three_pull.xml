@@ -46,7 +46,7 @@
         android:visibility="gone"
         >
         <com.dobi.live.view.MyIjkVideoView
-            android:id="@+id/ijkplayer66"
+
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -55,7 +55,7 @@
         </com.dobi.live.view.MyIjkVideoView>
 
         <com.dobi.live.view.MyIjkVideoView
-            android:id="@+id/ijkplayer66"
+
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

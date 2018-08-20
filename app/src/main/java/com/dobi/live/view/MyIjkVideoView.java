@@ -123,7 +123,7 @@ public class MyIjkVideoView extends RelativeLayout {
         ijkplayer.start();
     }
     public void stopPlayback(){
-      //  ijkplayer.stopPlayback();
+        ijkplayer.stopPlayback();
       // ijkplayer.pause();
     }
     public void pause(){
