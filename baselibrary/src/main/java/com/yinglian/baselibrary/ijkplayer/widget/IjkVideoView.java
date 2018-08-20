@@ -359,10 +359,14 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
         try {
             if (usingAndroidPlayer) {
                 mMediaPlayer = new AndroidMediaPlayer();
+                //add by du
+               // mMediaPlayer.setVolume(1.0f,1.0f);
             } else {
                 IjkMediaPlayer ijkMediaPlayer = null;
                 if (mUri != null) {
                     ijkMediaPlayer = new IjkMediaPlayer();
+                    //add by du
+                    ijkMediaPlayer.setVolume(20.0f,20.0f);
                     ijkMediaPlayer.native_setLogLevel(IjkMediaPlayer.IJK_LOG_DEBUG);
 
                     if (usingMediaCodec) {
@@ -388,6 +392,10 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
                         ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "overlay-format", pixelFormat);
                     }
                     ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "framedrop", 1);
+                    //add by me
+                    ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "vol", 256);
+
+
                     ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "start-on-prepared", 0);
 
                     ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "http-detect-range-support", 0);
@@ -885,6 +893,9 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
         } else {
         }
         mTargetState = PlayStateParams.STATE_PLAYING;
+
+        //add by du
+     //   mMediaPlayer.setVolume(1.0f,1.0f);
     }
 
     @Override
@@ -1061,5 +1072,19 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
                 break;
             }
         }
+    }
+
+
+    public  void setVolume(float val1,float val2){
+        //if(mMediaPlayer!=null){
+            mMediaPlayer.setVolume(val1,val2);
+       // }
+
+    }
+
+
+
+    public  interface VolumeListener{
+        public void setV();
     }
 }

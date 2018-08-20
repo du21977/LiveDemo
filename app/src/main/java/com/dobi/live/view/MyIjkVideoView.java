@@ -71,6 +71,9 @@ public class MyIjkVideoView extends RelativeLayout {
                         Log.e(TAG, "MEDIA_INFO_VIDEO_RENDERING_START:");
                         progressbar.setVisibility(View.GONE);
                         ijkplayer.setBackgroundColor(Color.TRANSPARENT);
+                        if(mLisenter!=null){
+                            mLisenter.setVol();
+                        }
                         break;
                     case IMediaPlayer.MEDIA_INFO_BUFFERING_START:    //开始了缓冲，卡了
                         Log.e(TAG, "MEDIA_INFO_BUFFERING_START:");
@@ -148,5 +151,17 @@ public class MyIjkVideoView extends RelativeLayout {
     }
 
 
+    public  void setVolume(float val1,float val2){
+        ijkplayer.setVolume(val1,val2);
+    }
+
+    private VolListener mLisenter;
+    public void SetVolumeListener(VolListener volListener){
+        this.mLisenter = volListener;
+    }
+
+    public interface VolListener{
+        void setVol();
+    }
 
 }
