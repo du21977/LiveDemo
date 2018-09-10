@@ -15,9 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Setup1Activity"
+            android:name=".PushActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait">
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,13 +25,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Setup1Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Main1Activity"
+            android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape" />
+
+         <activity
+         android:name=".Main1Activity"
+         android:configChanges="orientation|keyboardHidden|screenSize"
+         android:screenOrientation="landscape" />
+
         <activity
             android:name=".Main22Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -50,14 +56,18 @@
         <activity
             android:name=".SetupActivity"
             android:screenOrientation="portrait" />
+        <!-- <activity -->
+        <!-- android:name=".Setup1Activity" -->
+        <!-- android:screenOrientation="portrait" /> -->
         <activity
             android:name=".ThreePull2Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape" />
-        <activity android:name=".ThreePullActivity"
+        <activity
+            android:name=".ThreePullActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
-            ></activity>
+            android:screenOrientation="landscape" />
+
     </application>
 
 </manifest>
