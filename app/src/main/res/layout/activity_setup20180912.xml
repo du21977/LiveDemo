@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:background="#1E1E28"
+    >
+
+
+
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@mipmap/logo1"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="40dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请输入推流地址"
+        android:layout_marginLeft="10dp"
+        android:visibility="visible"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="10dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_push"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/app_background"
+            >
+            <EditText
+                android:id="@+id/et_push"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="请输入推流地址"
+                android:textColor="#333333"
+                android:paddingLeft="0dp"
+                android:textColorHint="#999999"
+                android:textSize="14sp"
+                android:text="rtmp://119.131.176.169/live/test2"
+                android:layout_marginRight="0dp"
+                android:background="@null"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="删除"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请输入拉流地址"
+        android:layout_marginLeft="10dp"
+        android:visibility="visible"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="10dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_sb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/app_background"
+            >
+            <EditText
+                android:id="@+id/et_pull1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="请输入拉流地址"
+                android:textColor="#333333"
+                android:paddingLeft="0dp"
+                android:textColorHint="#999999"
+                android:textSize="14sp"
+                android:text="rtmp://live.hkstv.hk.lxdns.com/live/hks"
+                android:layout_marginRight="0dp"
+                android:background="@null"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="删除"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+    <EditText
+        android:id="@+id/et_pull2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/app_background"
+        android:hint="请输入拉流地址"
+        android:textColor="#333333"
+        android:paddingLeft="0dp"
+        android:layout_marginTop="10dp"
+        android:textColorHint="#999999"
+        android:textSize="14sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="rtmp://202.69.69.180:443/webcast/bshdlive-pc"
+        android:visibility="visible"
+        />
+
+
+    <EditText
+        android:id="@+id/et_pull3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/app_background"
+        android:hint="请输入拉流地址"
+        android:textColor="#333333"
+        android:paddingLeft="0dp"
+        android:layout_marginTop="10dp"
+        android:textColorHint="#999999"
+        android:textSize="14sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="rtmp://mobliestream.c3tv.com:554/live/goodtv.sdp"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/btn_enter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="进入"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/tv_add"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/app_button_style_2"
+        android:layout_marginTop="20dp"
+        android:text="添加"
+        android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/tv_play"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/app_button_style_2"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="开始"
+        android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_horizontal"
+        />
+
+</LinearLayout>
